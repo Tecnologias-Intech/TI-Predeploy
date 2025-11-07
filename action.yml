@@ -1,0 +1,34 @@
+name: 'TI Predeploy'
+description: "Updates main branch with develop branch changes."
+author: 'Ismael Pérez / Tecnologias Intech'
+
+inputs:
+  github-token:
+    description: "Access token for GitHub API."
+    required: true
+  pat:
+    description: "Personal Access Token to approve/merge the PR."
+    required: true
+  origin-branch:
+    description: "The base branch for the PR (eg: main-deploy-test)."
+    required: false
+    default: 'develop'
+  target-branch:
+    description: "The base branch for the PR (eg: main-deploy-test)."
+    required: false
+    default: 'develop'
+  project-id:
+    description: "Project ID for status update."
+    required: true
+  intech-api:
+    description: "Url to Intech API"
+    required: false
+    default: 'https://us-central1-tintech-crm.cloudfunctions.net/api'
+  backend:
+    description: "Flag to indicate if the action is running in backend or frontend."
+    required: false
+    default: 'false'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
