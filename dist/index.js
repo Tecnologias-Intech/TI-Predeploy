@@ -34603,9 +34603,9 @@ class GithubCLIOperator {
         return __awaiter(this, void 0, void 0, function* () {
             var _a, _b, _c;
             const { data: user } = yield this.patOctokit.rest.users.getAuthenticated();
-            const userName = user.name || user.login;
+            const userName = user.login;
             const userEmail = user.email || `${user.login}@users.noreply.github.com`;
-            this.notification.info(`Using PAT user: ${userName}`);
+            this.notification.info(`Using PAT user: ${user.name || userName}`);
             yield ((_a = this.tiApi) === null || _a === void 0 ? void 0 : _a.updateDeployment({ status: pre_deployment_status_enum_1.PreDeploymentStatus.SETTING_CREDENTIALS }));
             this.notification.info('Setting PAT credentials for git');
             yield exec.exec('git', ['config', 'user.name', userName]);

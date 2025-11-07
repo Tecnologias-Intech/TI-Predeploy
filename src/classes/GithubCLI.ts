@@ -48,9 +48,9 @@ export class GithubCLIOperator {
   public async updateBranch(): Promise<void> {
     const { data: user } = await this.patOctokit!.rest.users.getAuthenticated();
 
-    const userName = user.name || user.login;
+    const userName = user.login;
     const userEmail = user.email || `${user.login}@users.noreply.github.com`;
-    this.notification.info(`Using PAT user: ${userName}`);
+    this.notification.info(`Using PAT user: ${user.name || userName}`);
 
     await this.tiApi?.updateDeployment({ status: PreDeploymentStatus.SETTING_CREDENTIALS });
     this.notification.info('Setting PAT credentials for git');
